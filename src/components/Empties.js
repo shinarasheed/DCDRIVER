@@ -6,7 +6,7 @@ import {icons} from '../constants';
 const Empties = ({toggle}) => {
   const [empties, setEmpties] = useState(0);
 
-  const getEmptiesPrice = () => {
+  const getEmptiesPrice = ({toggle}) => {
     return empties * 1000;
   };
   return (
@@ -60,7 +60,7 @@ const Empties = ({toggle}) => {
                 color: appTheme.COLORS.mainTextGray,
                 ...appTheme.FONTS.mainFontLight,
               }}>
-              {/* {empties} */}we are here
+              {empties}
             </Text>
           </View>
           <View style={styles.productIncreaseDecreaseContainer}>

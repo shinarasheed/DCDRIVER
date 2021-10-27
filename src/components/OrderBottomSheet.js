@@ -292,7 +292,7 @@ import icons from '../constants/icons';
 import appTheme from '../constants/theme';
 import OrderBottomSheetCard from './OrderBottomSheetCard';
 import CustomVirtualist from './VirtualizedList';
-import ProductFooter from './ProductFooter';
+// import ProductFooter from './ProductFooter';
 import OrderFooter from './OrderFooter';
 import {fetchProducts} from '../redux/actions/productActions';
 import Empties from './Empties';
@@ -408,7 +408,7 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
           borderBottomColor: appTheme.COLORS.borderGRey,
           paddingBottom: 30,
         }}>
-        <View
+        {/* <View
           style={{
             justifyContent: 'space-between',
             flexDirection: 'row',
@@ -418,11 +418,12 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
           <Pressable onPress={() => toggle()}>
             <Image source={icons.cancelIcon} />
           </Pressable>
-        </View>
-        {/* {showEmpties() && <Empties toggle={toggle} />} */}
+        </View> */}
+
+        <Empties toggle={toggle} />
       </View>
 
-      {/* <FlatList
+      <FlatList
         style={{
           backgroundColor: appTheme.COLORS.white,
           marginTop: 25,
@@ -438,7 +439,7 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
             deleteProduct={deleteProduct}
           />
         )}
-      /> */}
+      />
 
       <View style={{marginLeft: 20, marginTop: 20}}>
         <Text
@@ -462,12 +463,12 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
                 flexDirection: 'row',
               }}>
               <Text style={{fontSize: 16}}>Qty:</Text>
-              {/* <Text style={{fontSize: 16, color: appTheme.COLORS.black}}>
+              <Text style={{fontSize: 16, color: appTheme.COLORS.black}}>
                 {empties}
-              </Text> */}
+              </Text>
             </View>
 
-            {/* <Text
+            <Text
               style={{
                 color: appTheme.COLORS.mainRed,
                 fontWeight: 'bold',
@@ -475,7 +476,7 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
               }}>
               {'\u20A6'}
               {1000 * empties}
-            </Text> */}
+            </Text>
           </View>
           <View
             style={{
@@ -487,20 +488,20 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
               borderColor: appTheme.COLORS.borderGRey,
               borderRadius: 5,
             }}>
-            {/* <Text style={{color: appTheme.COLORS.black, fontWeight: '400'}}>
+            <Text style={{color: appTheme.COLORS.black, fontWeight: '400'}}>
               {'\u20A6'}1000
-            </Text> */}
+            </Text>
           </View>
         </View>
       </View>
-      {/* <OrderFooter
+      <OrderFooter
         order={item}
         productsToSell={newOrders}
         getTotalPrice={getTotalPrice}
         getEmptiesPrice={getEmptiesPrice}
         setVisible={setVisible}
         visible={visible}
-      /> */}
+      />
     </CustomVirtualist>
   );
 };
