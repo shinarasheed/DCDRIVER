@@ -388,7 +388,13 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
     setNewOrders([...newOrders]);
   };
 
+  // console.log('hello');
+
   const showEmpties = () => {
+    // console.log(
+    //   newOrders.find(prod => prod.productType === 'full'),
+    //   '================================',
+    // );
     return newOrders.filter(prod => prod.productType === 'full').length;
   };
 
@@ -413,10 +419,10 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
             <Image source={icons.cancelIcon} />
           </Pressable>
         </View>
-        {showEmpties() && <Empties toggle={toggle} />}
+        {/* {showEmpties() && <Empties toggle={toggle} />} */}
       </View>
 
-      <FlatList
+      {/* <FlatList
         style={{
           backgroundColor: appTheme.COLORS.white,
           marginTop: 25,
@@ -432,7 +438,7 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
             deleteProduct={deleteProduct}
           />
         )}
-      />
+      /> */}
 
       <View style={{marginLeft: 20, marginTop: 20}}>
         <Text
@@ -456,22 +462,20 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
                 flexDirection: 'row',
               }}>
               <Text style={{fontSize: 16}}>Qty:</Text>
-              <Text style={{fontSize: 16, color: appTheme.COLORS.black}}>
-                {' '}
+              {/* <Text style={{fontSize: 16, color: appTheme.COLORS.black}}>
                 {empties}
-              </Text>
+              </Text> */}
             </View>
 
-            <Text
+            {/* <Text
               style={{
                 color: appTheme.COLORS.mainRed,
                 fontWeight: 'bold',
                 marginLeft: 10,
               }}>
-              {' '}
               {'\u20A6'}
               {1000 * empties}
-            </Text>
+            </Text> */}
           </View>
           <View
             style={{
@@ -483,20 +487,20 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
               borderColor: appTheme.COLORS.borderGRey,
               borderRadius: 5,
             }}>
-            <Text style={{color: appTheme.COLORS.black, fontWeight: '400'}}>
+            {/* <Text style={{color: appTheme.COLORS.black, fontWeight: '400'}}>
               {'\u20A6'}1000
-            </Text>
+            </Text> */}
           </View>
         </View>
       </View>
-      <OrderFooter
+      {/* <OrderFooter
         order={item}
         productsToSell={newOrders}
         getTotalPrice={getTotalPrice}
         getEmptiesPrice={getEmptiesPrice}
         setVisible={setVisible}
         visible={visible}
-      />
+      /> */}
     </CustomVirtualist>
   );
 };

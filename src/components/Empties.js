@@ -60,7 +60,7 @@ const Empties = ({toggle}) => {
                 color: appTheme.COLORS.mainTextGray,
                 ...appTheme.FONTS.mainFontLight,
               }}>
-              {empties}
+              {/* {empties} */}we are here
             </Text>
           </View>
           <View style={styles.productIncreaseDecreaseContainer}>
