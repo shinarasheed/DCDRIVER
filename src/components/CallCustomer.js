@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Linking, Pressable, Image, Text, View} from 'react-native';
 import {icons} from '../constants';
+import appTheme from '../constants/theme';
 
 const CallCustomer = ({phoneNumber}) => {
   return (
