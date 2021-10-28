@@ -23,11 +23,6 @@ const GenerateInvoice = () => {
 
   const {productsToSell, empties, order} = route.params;
 
-  console.log({productsToSell, empties, order});
-
-  // const updateOrder = useSelector(state => state.updateOrder);
-  // const {order, loading: updatedLoading, error: updatedError} = updateOrder;
-
   const getTotalPrice = () => {
     return productsToSell.reduce(
       (accumulator, order) => accumulator + order?.quantity * order?.price,
