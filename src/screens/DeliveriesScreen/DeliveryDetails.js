@@ -23,6 +23,7 @@ import {fetchOrder, updateOrderStatus} from '../../redux/actions/orderActions';
 import {fetchProducts} from '../../redux/actions/productActions';
 import {orderUrl} from '../../utils/baseUrl';
 import {Spinner} from '../../components/Spinner';
+import CallCustomer from '../../components/CallCustomer';
 
 const DeliveryDetails = () => {
   const [loadingOrder, setLoadingOrder] = useState(false);
@@ -241,26 +242,11 @@ const DeliveryDetails = () => {
                         {theOrder !== undefined &&
                           theOrder?.buyerDetails[0]?.buyerPhoneNumber}
                       </Text>
-
-                      <Pressable>
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginLeft: 60,
-                          }}>
-                          <Image source={icons.phoneIcon} />
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: '500',
-                              marginLeft: 5,
-                              color: appTheme.COLORS.black,
-                            }}>
-                            Call
-                          </Text>
-                        </View>
-                      </Pressable>
+                      <CallCustomer
+                        phoneNumber={
+                          theOrder?.buyerDetails[0]?.buyerPhoneNumber
+                        }
+                      />
                     </View>
                   </View>
                 </View>
