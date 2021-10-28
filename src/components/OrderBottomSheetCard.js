@@ -9,6 +9,7 @@ const OrderBottomSheetCard = ({
   incrementQuantity,
   decrementQuantity,
   deleteProduct,
+  getQuantity,
 }) => {
   const {
     orderId,
@@ -145,7 +146,11 @@ const OrderBottomSheetCard = ({
             </View>
 
             <View style={styles.container}>
-              <Pressable onPress={() => incrementQuantity(productId)}>
+              <Pressable
+                onPress={() =>
+                  getQuantity(productId, quantity) &&
+                  incrementQuantity(productId)
+                }>
                 <Text style={styles.IncreaseText}>+</Text>
               </Pressable>
             </View>

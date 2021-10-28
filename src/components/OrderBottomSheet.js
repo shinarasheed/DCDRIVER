@@ -14,6 +14,18 @@ import Empties from './Empties';
 const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
   const allProducts = useSelector(state => state.products);
   const [newOrders, setNewOrders] = useState([]);
+
+  const Van = useSelector(state => state.van);
+  const {inventory, loading: vanLoading, error: vanError} = Van;
+
+  const getQuantity = (productId, quantity) => {
+    return (
+      quantity <
+      inventory.find(product => product.product.productId === productId)
+        ?.quantity
+    );
+  };
+
   const dispatch = useDispatch();
 
   const [empties, setEmpties] = useState(0);
@@ -144,6 +156,7 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
             deleteProduct={deleteProduct}
+            getQuantity={getQuantity}
           />
         )}
       />
