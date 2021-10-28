@@ -1,28 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Pressable, Image, Text, View} from 'react-native';
+import {StyleSheet, Pressable, Text, View} from 'react-native';
 import appTheme from '../constants/theme';
 import {icons} from '../constants';
 
-const Empties = ({toggle}) => {
-  const [empties, setEmpties] = useState(0);
-
-  const getEmptiesPrice = ({toggle}) => {
-    return empties * 1000;
-  };
+const Empties = ({toggle, NumberOfFull, setEmpties, empties}) => {
   return (
     <>
-      <View
-        style={{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          marginBottom: 20,
-        }}>
-        <Text style={{fontSize: 20}}>Order Delivery</Text>
-        <Pressable onPress={() => toggle()}>
-          <Image source={icons.cancelIcon} />
-        </Pressable>
-      </View>
-
       <View>
         <Text
           style={{
@@ -64,7 +47,9 @@ const Empties = ({toggle}) => {
             </Text>
           </View>
           <View style={styles.productIncreaseDecreaseContainer}>
-            <Pressable onPress={() => setEmpties(empties + 1)}>
+            <Pressable
+              disabled={empties >= NumberOfFull()}
+              onPress={() => setEmpties(empties + 1)}>
               <Text style={styles.IncreaseText}>+</Text>
             </Pressable>
           </View>

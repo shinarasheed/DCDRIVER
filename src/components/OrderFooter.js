@@ -9,7 +9,6 @@ import {updateOrderStatus} from '../redux/actions/orderActions';
 
 const OrderFooter = ({
   getTotalPrice,
-  getEmptiesPrice,
   order,
   productsToSell,
   setVisible,
@@ -32,11 +31,11 @@ const OrderFooter = ({
             }),
           );
 
-          setVisible(!visible);
+          // setVisible(!visible);
 
-          navigator.navigate('GenerateInvoice', {
-            productsToSell,
-          });
+          // navigator.navigate('GenerateInvoice', {
+          //   productsToSell,
+          // });
         }}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,
@@ -46,7 +45,7 @@ const OrderFooter = ({
           borderRadius: 5,
           marginTop: 10,
         }}
-        title={` Confirm \u20A6${getTotalPrice() + getEmptiesPrice()}`}
+        title={` Confirm \u20A6${getTotalPrice()}`}
       />
     </View>
   );
