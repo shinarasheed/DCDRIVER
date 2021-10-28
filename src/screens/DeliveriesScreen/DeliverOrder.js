@@ -22,6 +22,7 @@ import {icons} from '../../constants';
 import OrderBottomSheet from '../../components/OrderBottomSheet';
 import {fetchProducts} from '../../redux/actions/productActions';
 import {fetchOrder} from '../../redux/actions/orderActions';
+import CallCustomer from '../../components/CallCustomer';
 
 const DeliverOrder = () => {
   const [theOrder, setTheOrder] = useState(null);
@@ -195,25 +196,9 @@ const DeliverOrder = () => {
                       {theOrder?.buyerDetails[0]?.buyerPhoneNumber}
                     </Text>
 
-                    <Pressable>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          marginLeft: 60,
-                        }}>
-                        <Image source={icons.phoneIcon} />
-                        <Text
-                          style={{
-                            fontSize: 15,
-                            fontWeight: '500',
-                            marginLeft: 5,
-                            color: appTheme.COLORS.black,
-                          }}>
-                          Call
-                        </Text>
-                      </View>
-                    </Pressable>
+                    <CallCustomer
+                      phoneNumber={theOrder?.buyerDetails[0]?.buyerPhoneNumber}
+                    />
                   </View>
                 </View>
               </View>

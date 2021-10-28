@@ -16,6 +16,7 @@ import {icons} from '../../constants';
 
 import Header from '../../components/Header';
 import CustomVirtualizedView from '../../components/VirtualizedList';
+import CallCustomer from '../../components/CallCustomer';
 
 const Customer = () => {
   const route = useRoute();
@@ -243,25 +244,9 @@ const Customer = () => {
                   {order?.buyerDetails[0]?.buyerPhoneNumber}
                 </Text>
 
-                <Pressable>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginLeft: 60,
-                    }}>
-                    <Image source={icons.phoneIcon} />
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: '500',
-                        marginLeft: 5,
-                        color: appTheme.COLORS.black,
-                      }}>
-                      Call
-                    </Text>
-                  </View>
-                </Pressable>
+                <CallCustomer
+                  phoneNumber={order?.buyerDetails[0]?.buyerPhoneNumber}
+                />
               </View>
             </View>
           </View>
