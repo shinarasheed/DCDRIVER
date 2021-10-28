@@ -10,6 +10,7 @@ import ProductBottomSheet from './ProductBottomSheet';
 
 const SellProductFooter = ({
   getTotalPrice,
+  getProductPrice,
   incrementQuantity,
   decrementQuantity,
   deleteProduct,
@@ -17,6 +18,9 @@ const SellProductFooter = ({
   order,
   getQuantity,
   calNumberOfFull,
+  setEmpties,
+  empties,
+  getEmptiesPrice,
 }) => {
   const navigation = useNavigation();
 
@@ -89,7 +93,7 @@ const SellProductFooter = ({
           borderRadius: 5,
           marginTop: 10,
         }}
-        title={` Confirm \u20A6${getTotalPrice()}`}
+        title={` Confirm \u20A6${getProductPrice()}`}
       />
 
       <BottomSheet
@@ -107,6 +111,9 @@ const SellProductFooter = ({
             item={order}
             getQuantity={getQuantity}
             calNumberOfFull={calNumberOfFull}
+            setEmpties={setEmpties}
+            empties={empties}
+            getEmptiesPrice={getEmptiesPrice}
           />
         </View>
       </BottomSheet>

@@ -214,7 +214,6 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
       <OrderFooter
         order={item}
         productsToSell={newOrders}
-        // getTotalPrice={getTotalPrice}
         getTotalPrice={getTotal}
         getEmptiesPrice={getEmptiesPrice}
         setVisible={setVisible}

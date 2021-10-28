@@ -22,7 +22,6 @@ import {fetchVanProducts} from '../../redux/actions/vanActions';
 const SellToCustomer = () => {
   const navigator = useNavigation();
   const dispatch = useDispatch();
-  const [empties, setEmpties] = useState(0);
   const [newInventory, setNewInventory] = useState([]);
 
   const route = useRoute();
@@ -51,6 +50,8 @@ const SellToCustomer = () => {
         ?.quantity
     );
   };
+
+  const [empties, setEmpties] = useState(0);
 
   const getEmptiesPrice = () => {
     return empties * 1000;
@@ -188,7 +189,9 @@ const SellToCustomer = () => {
       {/* 
       {/* Footer */}
       <SellProductFooter
-        getTotalPrice={getTotalPrice}
+        getTotalPrice={getTotal}
+        getProductPrice={getTotalPrice}
+        getEmptiesPrice={getEmptiesPrice}
         productsToSell={productsToSell}
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
@@ -196,6 +199,8 @@ const SellToCustomer = () => {
         order={order}
         getQuantity={getQuantity}
         calNumberOfFull={calNumberOfFull}
+        setEmpties={setEmpties}
+        empties={empties}
       />
     </SafeAreaView>
   );

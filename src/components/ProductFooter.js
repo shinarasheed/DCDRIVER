@@ -7,14 +7,7 @@ import {Button} from 'react-native-elements';
 import appTheme from '../constants/theme';
 import {updateOrderStatus} from '../redux/actions/orderActions';
 
-const SellProductFooter = ({
-  getTotalPrice,
-  getEmptiesPrice,
-  order,
-  productsToSell,
-  setVisible,
-  visible,
-}) => {
+const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
   // TODO: you need to pass the item as route parameter later
   const navigator = useNavigation();
 
@@ -32,8 +25,6 @@ const SellProductFooter = ({
             }),
           );
 
-          // setVisible(!visible);
-
           navigator.navigate('GenerateInvoice', {
             productsToSell,
           });
@@ -46,7 +37,7 @@ const SellProductFooter = ({
           borderRadius: 5,
           marginTop: 10,
         }}
-        title={` Confirm \u20A6${getTotalPrice() + getEmptiesPrice()}`}
+        title={` Confirm \u20A6${getTotalPrice()}`}
       />
     </View>
   );

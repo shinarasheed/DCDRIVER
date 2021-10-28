@@ -18,13 +18,10 @@ const ProductBottomSheet = ({
   item,
   getQuantity,
   calNumberOfFull,
+  setEmpties,
+  empties,
+  getEmptiesPrice,
 }) => {
-  const [empties, setEmpties] = useState(0);
-
-  const getEmptiesPrice = () => {
-    return empties * 1000;
-  };
-
   return (
     <CustomVirtualist>
       <View
@@ -142,7 +139,6 @@ const ProductBottomSheet = ({
         decrementQuantity={decrementQuantity}
         deleteProduct={deleteProduct}
         getTotalPrice={getTotalPrice}
-        getEmptiesPrice={getEmptiesPrice}
         order={item}
         productsToSell={productsToSell}
       />
