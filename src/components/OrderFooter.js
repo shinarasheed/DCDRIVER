@@ -5,37 +5,48 @@ import {useNavigation} from '@react-navigation/native';
 import {Button} from 'react-native-elements';
 
 import appTheme from '../constants/theme';
-import {updateOrderStatus} from '../redux/actions/orderActions';
+import {confirmOrder} from '../redux/actions/orderActions';
+import {updateInventory} from '../redux/actions/vanActions';
 
 const OrderFooter = ({
   getTotalPrice,
   order,
-  productsToSell,
   setVisible,
   visible,
+  newOrders,
+  empties,
 }) => {
-  // TODO: you need to pass the item as route parameter later
   const navigator = useNavigation();
 
   const dispatch = useDispatch();
+  const arrayToSubmit = async () => {
+    let orderItems = [];
+    newOrders.map(newOrder => {
+      orderItems.push({
+        quantity: newOrder.quantity,
+        productId: newOrder.quantity,
+        price: newOrder.price,
+      });
+    });
+    return orderItems;
+  };
 
   return (
     <View style={styles.footerContainer}>
       <Button
-        onPress={() => {
-          dispatch(
-            updateOrderStatus({
-              assignedToId: order.vehicleId,
-              orderId: order.orderId,
-              status: 'Completed',
-            }),
-          );
-
-          // setVisible(!visible);
-
-          // navigator.navigate('GenerateInvoice', {
-          //   productsToSell,
-          // });
+        onPress={async () => {
+          const payload = {
+            emptiesReturned: empties,
+            sellerCompanyId: order.sellerCompanyId,
+            orderItems: await arrayToSubmit(),
+          };
+          dispatch(confirmOrder({payload, orderId: order.orderId}));
+          dispatch(updateInventory(payload));
+          navigator.navigate('GenerateInvoice', {
+            productsToSell: newOrders,
+            empties,
+            order,
+          });
         }}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,

@@ -13,6 +13,9 @@ import {
   FETCH_ORDER_STATS_REQUEST,
   FETCH_ORDER_STATS_SUCCESS,
   FETCH_ORDER_STATS_FAIL,
+  CONFIRM_ORDER_REQUEST,
+  CONFIRM_ORDER_SUCCESS,
+  CONFIRM_ORDER_FAIL,
 } from '../constants/orderContants';
 import {orderUrl} from '../../utils/baseUrl';
 
@@ -124,6 +127,39 @@ export const fetchOrderStats =
       console.log(error);
       dispatch({
         type: FETCH_ORDER_STATS_FAIL,
+        payload: 'There was an error',
+      });
+    }
+  };
+
+export const confirmOrder =
+  ({payload, orderId}) =>
+  async dispatch => {
+    try {
+      dispatch({
+        type: CONFIRM_ORDER_REQUEST,
+      });
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const {data} = await axios.patch(
+        `${orderUrl}/UpdateOrder/UpdateOrderDetails/${orderId}`,
+        payload,
+        config,
+      );
+
+      dispatch({
+        type: CONFIRM_ORDER_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: CONFIRM_ORDER_FAIL,
         payload: 'There was an error',
       });
     }

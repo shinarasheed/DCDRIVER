@@ -102,16 +102,6 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
     setNewOrders([...newOrders]);
   };
 
-  // console.log('hello');
-
-  const showEmpties = () => {
-    // console.log(
-    //   newOrders.find(prod => prod.productType === 'full'),
-    //   '================================',
-    // );
-    return newOrders.find(prod => prod.productType === 'full');
-  };
-
   const calNumberOfFull = () => {
     return newOrders
       .filter(product => product.productType === 'full')
@@ -119,9 +109,6 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
   };
 
   const getTotal = () => {
-    const totalPrice = getTotalPrice();
-    const calNum = calNumberOfFull();
-    console.log({totalPrice, calNum, empties});
     return getTotalPrice() + (calNumberOfFull() - empties) * 1000;
   };
 
@@ -233,6 +220,8 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
         getEmptiesPrice={getEmptiesPrice}
         setVisible={setVisible}
         visible={visible}
+        newOrders={newOrders}
+        empties={empties}
       />
     </CustomVirtualist>
   );

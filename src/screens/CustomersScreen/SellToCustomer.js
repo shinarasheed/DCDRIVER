@@ -39,8 +39,6 @@ const SellToCustomer = () => {
   const route = useRoute();
   const order = route.params;
 
-  console.log(order);
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);

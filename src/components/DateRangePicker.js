@@ -19,8 +19,6 @@ export default class App extends React.Component {
     this.setState({
       ...dates,
     });
-
-    console.log(dates);
   };
 
   render() {

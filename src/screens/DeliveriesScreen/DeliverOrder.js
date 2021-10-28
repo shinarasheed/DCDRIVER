@@ -42,13 +42,9 @@ const DeliverOrder = () => {
     error: updatedError,
   } = updateOrder;
 
-  console.log(item, '==============');
-
   useEffect(() => {
     setTimeout(() => {
       if (!updatedOrder?.orderId) {
-        console.log(item, '+++++++++++++++++');
-
         setTheOrder(item);
       }
       setTheOrder(updatedOrder);
@@ -85,8 +81,6 @@ const DeliverOrder = () => {
   function toggle() {
     setVisible(!visible);
   }
-
-  console.log(theOrder);
 
   return (
     <SafeAreaView

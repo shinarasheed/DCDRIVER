@@ -11,6 +11,9 @@ import {
   FETCH_ORDER_STATS_REQUEST,
   FETCH_ORDER_STATS_SUCCESS,
   FETCH_ORDER_STATS_FAIL,
+  CONFIRM_ORDER_REQUEST,
+  CONFIRM_ORDER_SUCCESS,
+  CONFIRM_ORDER_FAIL,
 } from '../constants/orderContants';
 
 export const ordersReducer = (state = {order: []}, action) => {
@@ -102,6 +105,31 @@ export const orderStatsReducer = (state = {stats: {}}, action) => {
       };
 
     case FETCH_ORDER_STATS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const orderConfirmReducer = (state = {response: {}}, action) => {
+  switch (action.type) {
+    case CONFIRM_ORDER_REQUEST:
+      return {
+        loading: true,
+        response: {},
+      };
+
+    case CONFIRM_ORDER_SUCCESS:
+      return {
+        loading: false,
+        response: action.payload,
+      };
+
+    case CONFIRM_ORDER_FAIL:
       return {
         loading: false,
         error: action.payload,

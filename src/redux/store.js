@@ -8,8 +8,9 @@ import {
   orderUpdateReducer,
   orderSingleReducer,
   orderStatsReducer,
+  orderConfirmReducer,
 } from './reducers/orderReducer';
-import {vanReducer} from './reducers/vanReducers';
+import {vanReducer, updateInventoryReducer} from './reducers/vanReducers';
 import {productsReducer} from './reducers/productReducer';
 import {customerOneOfReducer} from './reducers/customerReducer';
 
@@ -18,9 +19,11 @@ const reducer = combineReducers({
   singleOrder: orderSingleReducer,
   updateOrder: orderUpdateReducer,
   orderStats: orderStatsReducer,
+  confirmOrder: orderConfirmReducer,
   products: productsReducer,
   customerOneOf: customerOneOfReducer,
   van: vanReducer,
+  updateInventory: updateInventoryReducer,
 });
 
 const initialState = {};

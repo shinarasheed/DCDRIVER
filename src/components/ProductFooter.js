@@ -18,8 +18,6 @@ const SellProductFooter = ({
   // TODO: you need to pass the item as route parameter later
   const navigator = useNavigation();
 
-  console.log(order);
-
   const dispatch = useDispatch();
 
   return (
