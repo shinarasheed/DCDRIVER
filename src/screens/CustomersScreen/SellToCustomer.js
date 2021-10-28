@@ -75,7 +75,7 @@ const SellToCustomer = () => {
     );
     if (product.quantity === 1) {
       const index = newInventory.findIndex(
-        product => product.product.productId === productId,
+        product => product.productId === productId,
       );
       newInventory.splice(index, 1);
       setNewInventory([...newInventory]);
@@ -95,7 +95,7 @@ const SellToCustomer = () => {
 
   const calNumberOfFull = () => {
     return newInventory
-      .filter(product => product.product.productType === 'full')
+      .filter(product => product.productType === 'full')
       .reduce((acc, index) => parseInt(acc) + parseInt(index?.quantity), 0);
   };
 
@@ -158,6 +158,18 @@ const SellToCustomer = () => {
         </View> */}
         {/* searchbar */}
 
+        {/*  you need the token for customer and one of sales */}
+        {/* new Date(new Date.getTime()) */}
+        {/* shipToCode:buyerCompanyid */}
+        {/* billtocode:not compulsosy */}
+        {/* buyephone and adress is optional */}
+        {/* sflineId = Van-Sales */}
+
+        {/* One Off  */}
+
+        {/* one of does not need buyercompany id */}
+        {/* route name = One-Off */}
+
         <View
           style={{
             marginTop: 5,
@@ -169,6 +181,7 @@ const SellToCustomer = () => {
             decrementQuantity={decrementQuantity}
             deleteProduct={deleteProduct}
             loading={vanLoading}
+            getQuantity={getQuantity}
           />
         </View>
       </CustomVirtualizedView>
@@ -181,6 +194,8 @@ const SellToCustomer = () => {
         decrementQuantity={decrementQuantity}
         deleteProduct={deleteProduct}
         order={order}
+        getQuantity={getQuantity}
+        calNumberOfFull={calNumberOfFull}
       />
     </SafeAreaView>
   );

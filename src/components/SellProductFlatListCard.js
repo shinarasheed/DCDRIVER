@@ -9,6 +9,7 @@ const SellProductFlatListCard = ({
   incrementQuantity,
   decrementQuantity,
   deleteProduct,
+  getQuantity,
 }) => {
   const {
     // orderId,
@@ -149,7 +150,11 @@ const SellProductFlatListCard = ({
             </View>
 
             <View style={styles.productIncreaseDecreaseContainer}>
-              <Pressable onPress={() => incrementQuantity(productId)}>
+              <Pressable
+                onPress={() =>
+                  getQuantity(productId, quantity) &&
+                  incrementQuantity(productId)
+                }>
                 <Text style={styles.IncreaseText}>+</Text>
               </Pressable>
             </View>

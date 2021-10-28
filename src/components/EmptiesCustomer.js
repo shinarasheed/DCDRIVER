@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {StyleSheet, Pressable, Text, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, Pressable, Image, Text, View} from 'react-native';
 import appTheme from '../constants/theme';
 import {icons} from '../constants';
 
-const Empties = ({NumberOfFull, setEmpties, empties}) => {
+const EmptiesCustomer = ({NumberOfFull, setEmpties, empties}) => {
   return (
     <>
       <View>
@@ -59,7 +59,7 @@ const Empties = ({NumberOfFull, setEmpties, empties}) => {
   );
 };
 
-export default Empties;
+export default EmptiesCustomer;
 
 const styles = StyleSheet.create({
   productIncreaseDecreaseContainer: {

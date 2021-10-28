@@ -15,6 +15,8 @@ const SellProductFooter = ({
   deleteProduct,
   productsToSell,
   order,
+  getQuantity,
+  calNumberOfFull,
 }) => {
   const navigation = useNavigation();
 
@@ -103,6 +105,8 @@ const SellProductFooter = ({
             decrementQuantity={decrementQuantity}
             deleteProduct={deleteProduct}
             item={order}
+            getQuantity={getQuantity}
+            calNumberOfFull={calNumberOfFull}
           />
         </View>
       </BottomSheet>

@@ -6,6 +6,7 @@ import appTheme from '../constants/theme';
 import ProductBottomSheetCard from './ProductBottomSheetCard';
 import CustomVirtualist from './VirtualizedList';
 import ProductFooter from './ProductFooter';
+import EmptiesCustomer from './EmptiesCustomer';
 
 const ProductBottomSheet = ({
   productsToSell,
@@ -15,6 +16,8 @@ const ProductBottomSheet = ({
   getTotalPrice,
   toggle,
   item,
+  getQuantity,
+  calNumberOfFull,
 }) => {
   const [empties, setEmpties] = useState(0);
 
@@ -38,61 +41,24 @@ const ProductBottomSheet = ({
             flexDirection: 'row',
             marginBottom: 20,
           }}>
-          <Text style={{fontSize: 20}}>Sell To Customer</Text>
+          <Text style={{fontSize: 18}}>
+            Sell To {item?.buyerDetails[0]?.buyerName}
+          </Text>
           <Pressable onPress={() => toggle()}>
             <Image source={icons.cancelIcon} />
           </Pressable>
         </View>
 
         <View>
-          <Text
-            style={{
-              fontSize: 17,
-              color: appTheme.COLORS.mainTextGray,
-              marginBottom: 20,
-            }}>
-            Empties returned by customer
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
-            <View
-              style={[
-                styles.productIncreaseDecreaseContainer,
-                {marginRight: 5},
-              ]}>
-              <Pressable
-                disabled={empties === 0 ? true : false}
-                onPress={() => setEmpties(empties - 1)}>
-                <Text style={styles.IncreaseText}>-</Text>
-              </Pressable>
-            </View>
-            <View
-              style={{
-                borderWidth: 1,
-                width: 70,
-                borderColor: appTheme.COLORS.borderGRey,
-                marginRight: 5,
-                borderRadius: 5,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  color: appTheme.COLORS.mainTextGray,
-                  ...appTheme.FONTS.mainFontLight,
-                }}>
-                {empties}
-              </Text>
-            </View>
-            <View style={styles.productIncreaseDecreaseContainer}>
-              <Pressable onPress={() => setEmpties(empties + 1)}>
-                <Text style={styles.IncreaseText}>+</Text>
-              </Pressable>
-            </View>
-          </View>
+          {/* empties */}
+          {calNumberOfFull() ? (
+            <EmptiesCustomer
+              empties={empties}
+              setEmpties={setEmpties}
+              NumberOfFull={calNumberOfFull}
+              toggle={toggle}
+            />
+          ) : null}
         </View>
       </View>
 
@@ -107,6 +73,7 @@ const ProductBottomSheet = ({
             deleteProduct={deleteProduct}
             productsToSell={productsToSell}
             item={item}
+            getQuantity={getQuantity}
           />
         )}
         ItemSeparatorComponent={() => (

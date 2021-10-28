@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList, ActivityIndicator, View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 import appTheme from '../constants/theme';
 import SellProductFlatListCard from './SellProductFlatListCard';
 
@@ -8,6 +8,7 @@ const SellProductFlatList = ({
   incrementQuantity,
   decrementQuantity,
   deleteProduct,
+  getQuantity,
 }) => {
   return (
     <>
@@ -20,6 +21,7 @@ const SellProductFlatList = ({
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
             deleteProduct={deleteProduct}
+            getQuantity={getQuantity}
           />
         )}
         ItemSeparatorComponent={() => (
