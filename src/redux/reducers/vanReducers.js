@@ -6,6 +6,9 @@ import {
   UPDATE_INVENTORY_REQUEST,
   UPDATE_INVENTORY_SUCCESS,
   UPDATE_INVENTORY_FAIL,
+  CONFIRM_VAN_SALES_REQUEST,
+  CONFIRM_VAN_SALES_SUCCESS,
+  CONFIRM_VAN_SALES_FAIL,
 } from '../constants/vanConstants';
 
 export const vanReducer = (state = {inventory: []}, action) => {
@@ -47,6 +50,32 @@ export const updateInventoryReducer = (state = {inventory: []}, action) => {
       return {
         loading: false,
         inventory: payload,
+      };
+
+    case UPDATE_INVENTORY_FAIL:
+      return {
+        loading: false,
+        error: payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const confirmVanSalesReducer = (state = {response: []}, action) => {
+  const {type, payload} = action;
+  switch (type) {
+    case UPDATE_INVENTORY_REQUEST:
+      return {
+        loading: true,
+        response: [],
+      };
+
+    case UPDATE_INVENTORY_SUCCESS:
+      return {
+        loading: false,
+        response: payload,
       };
 
     case UPDATE_INVENTORY_FAIL:

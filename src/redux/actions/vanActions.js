@@ -8,6 +8,9 @@ import {
   UPDATE_INVENTORY_REQUEST,
   UPDATE_INVENTORY_SUCCESS,
   UPDATE_INVENTORY_FAIL,
+  CONFIRM_VAN_SALES_REQUEST,
+  CONFIRM_VAN_SALES_SUCCESS,
+  CONFIRM_VAN_SALES_FAIL,
 } from '../constants/vanConstants';
 import {vanurl} from '../../utils/baseUrl';
 
@@ -62,6 +65,37 @@ export const updateInventory = payload => async dispatch => {
     console.log(error);
     dispatch({
       type: UPDATE_INVENTORY_FAIL,
+      payload: 'There was an error',
+    });
+  }
+};
+
+export const confirmVanSales = payload => async dispatch => {
+  try {
+    dispatch({
+      type: CONFIRM_VAN_SALES_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const {data} = await axios.put(
+      `${vanurl}/inventory/update-quantity`,
+      payload,
+      config,
+    );
+
+    dispatch({
+      type: CONFIRM_VAN_SALES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: CONFIRM_VAN_SALES_FAIL,
       payload: 'There was an error',
     });
   }

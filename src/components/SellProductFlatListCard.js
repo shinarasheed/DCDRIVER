@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Image, Text, View, Pressable} from 'react-native';
 
 import {icons} from '../constants';
@@ -13,12 +13,12 @@ const SellProductFlatListCard = ({
   const {
     // orderId,
     productId,
-    quantity,
     brand,
     price,
     productType,
     imageUrl,
     sku,
+    quantity,
   } = product;
 
   return (

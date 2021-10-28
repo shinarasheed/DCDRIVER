@@ -1,393 +1,202 @@
-// dispatch(
-//     updateOrderStatus({
-//       assignedToId: theOrder?.vehicleId,
-//       orderId: theOrder?.orderId,
-//       status: 'Accepted',
-//     }),
-//   );
-//   settheOrder(updatedOrder);
+// import React, {useEffect, useState} from 'react';
+// import {
+//   SafeAreaView,
+//   Pressable,
+//   TextInput,
+//   Image,
+//   Text,
+//   View,
+//   StyleSheet,
+// } from 'react-native';
+// import {useSelector, useDispatch} from 'react-redux';
+// import {useRoute, useNavigation} from '@react-navigation/native';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// dispatch(
-//     updateOrderStatus({
-//       assignedToId: theOrder?.vehicleId,
-//       orderId: theOrder?.orderId,
-//       status: 'Rejected',
-//     }),
-//   );
-//   toggle();
-// settheOrder(updatedOrder);
+// import {fetchProducts} from '../../redux/actions/productActions';
+// import SearchBar from '../../components/SearchBar';
+// import appTheme from '../../constants/theme';
+// import SellProductFlatList from '../../components/SellProductFlatList';
+// import SellProductFooter from '../../components/SellProductFooter';
+// import CustomVirtualizedView from '../../components/VirtualizedList';
+// import {icons} from '../../constants';
 
-// const showEmpties = () => {
-//     return newOrders?.filter(product => product.productType === 'full').length;
+// const SellToCustomer = () => {
+//   const [searchField, setSearchField] = useState('');
+//   const navigator = useNavigation();
+//   const Allproducts = useSelector(state => state.products);
+//   const customerOneOf = useSelector(state => state.customerOneOf);
+//   const {
+//     customer,
+//     loading: loadingCustomer,
+//     error: errorCustomer,
+//   } = customerOneOf;
+
+//   const dispatch = useDispatch();
+//   const {products, loading, error} = Allproducts;
+
+//   const [newProducts, setNewProducts] = useState([]);
+
+//   const route = useRoute();
+//   const order = route.params;
+
+//   console.log(order);
+
+//   useEffect(() => {
+//     dispatch(fetchProducts());
+//   }, [dispatch]);
+
+//   const createProducts = () => {
+//     const lastestProducts = products.map(product => ({
+//       ...product,
+//       quantity: 0,
+//     }));
+//     return lastestProducts;
 //   };
 
-// invoice
+//   useEffect(() => {
+//     setNewProducts(createProducts());
+//   }, [products]);
 
-// {
-//   !updatedLoading ? (
-//     <>
+//   const incrementQuantity = productId => {
+//     let product = newProducts.find(product => product.productId === productId);
+//     product.quantity++;
+//     setNewProducts([...newProducts]);
+//   };
+
+//   const decrementQuantity = productId => {
+//     const product = newProducts.find(
+//       product => product.productId === productId,
+//     );
+//     if (product.quantity === 1) {
+//       const index = newProducts.findIndex(
+//         product => product.productId === productId,
+//       );
+//       newProducts.splice(index, 1);
+//       setNewProducts([...newProducts]);
+//     } else {
+//       product.quantity--;
+//       setNewProducts([...newProducts]);
+//     }
+//   };
+
+//   const deleteProduct = productId => {
+//     const index = newProducts.findIndex(
+//       product => product.productId === productId,
+//     );
+//     newProducts.splice(index, 1);
+//     setNewProducts([...newProducts]);
+//   };
+
+//   const getTotalPrice = () => {
+//     return newProducts.reduce(
+//       (accumulator, item) => accumulator + item.quantity * item.price,
+//       0,
+//     );
+//   };
+
+//   const productsToSell = newProducts.filter(product => product.quantity > 0);
+
+//   let filteredProducts = [];
+
+//   const handleOnChangetext = text => {
+//     setSearchField(text);
+//     filteredProducts = newProducts.filter(prod => {
+//       return prod.brand.toLowerCase().includes(searchField.toLowerCase());
+//     });
+//   };
+
+//   return (
+//     <SafeAreaView
+//       style={{
+//         flex: 1,
+//         backgroundColor: appTheme.COLORS.mainBackground,
+//       }}>
 //       <View
 //         style={{
 //           backgroundColor: appTheme.COLORS.white,
+//           height: 40,
+//           paddingLeft: 20,
 //           flexDirection: 'row',
 //           alignItems: 'center',
-//           height: 50,
-//           paddingLeft: 20,
+//           paddingBottom: 5,
 //         }}>
-//         <Pressable onPress={() => navigation.goBack()}>
-//           <Image source={icons.backButton} />
+//         <Pressable onPress={() => navigator.goBack()}>
+//           <Image source={icons.backButton} style={{marginRight: 18}} />
 //         </Pressable>
+
 //         <Text
 //           style={{
 //             fontSize: 17,
-//             color: appTheme.COLORS.black,
-//             fontWeight: '800',
-//             marginLeft: 20,
+//             fontWeight: '700',
+//             ...appTheme.FONTS.mainFontBold,
+//             textTransform: 'capitalize',
 //           }}>
-//           Order {updatedOrder !== undefined && updatedOrder.referenceId}
+//           {customer.CUST_Name !== undefined && `sell to ${customer.CUST_Name}`}
 //         </Text>
 //       </View>
 
-//       {/* done */}
-
 //       <CustomVirtualizedView>
-//         <View style={{paddingLeft: 20, paddingVertical: 20}}>
-//           <View style={{flexDirection: 'row', marginBottom: 10}}>
-//             <Text
-//               style={{
-//                 fontSize: 15,
-//                 marginRight: 5,
-//                 textTransform: 'lowercase',
-//               }}>
-//               {moment(
-//                 updatedOrder.orderStatus !== undefined &&
-//                   updatedOrder?.orderStatus[0]?.dateAssigned,
-//               ).format('MMM Do, YYYY')}{' '}
-//               at{' '}
-//               {new Date(
-//                 updatedOrder?.orderStatus[0]?.timeAssigned,
-//               ).toLocaleTimeString()}{' '}
-//               from
-//             </Text>
-//             <Text
-//               style={{
-//                 fontSize: 17,
-//                 fontWeight: 'bold',
-//                 color: appTheme.COLORS.black,
-//               }}>
-//               {updatedOrder.buyerDetails !== undefined &&
-//                 updatedOrder?.buyerDetails[0]?.buyerName}
-//             </Text>
-//           </View>
-//           {updatedOrder.orderItems !== undefined && (
-//             <View
-//               style={{
-//                 width: 100,
-//                 alignItems: 'center',
-//                 paddingHorizontal: 10,
-//                 paddingVertical: 7,
-//                 fontWeight: '600',
-//                 borderRadius: 20,
-//                 backgroundColor: appTheme.COLORS.mainGreen,
-//               }}>
-//               <Text style={{color: appTheme.COLORS.white}}>
-//                 {updatedOrder.orderStatus !== undefined &&
-//                   updatedOrder.orderStatus[0]?.status}
-//               </Text>
-//             </View>
-//           )}
-//         </View>
-
-//         {/* done */}
-
+//         {/* <SearchBar /> */}
 //         <View
 //           style={{
-//             backgroundColor: appTheme.COLORS.white,
-//             paddingLeft: 20,
-//             paddingVertical: 20,
-//           }}>
-//           <View>
-//             <Text
-//               style={{
-//                 fontWeight: 'bold',
-//                 color: appTheme.COLORS.MainGray,
-//                 fontSize: 20,
-//                 marginBottom: 20,
-//               }}>
-//               Customer
-//             </Text>
-//             <Text
-//               style={{
-//                 fontSize: 16,
-//                 color: appTheme.COLORS.black,
-//                 ...appTheme.FONTS.mainFontBold,
-//               }}>
-//               {updatedOrder.buyerDetails !== undefined &&
-//                 updatedOrder?.buyerDetails[0]?.buyerName}{' '}
-//             </Text>
-//           </View>
-
-//           <View style={{marginTop: 10, flexDirection: 'row'}}>
-//             <Image source={icons.addressIcon} />
-//             <View style={{marginLeft: 10, paddingRight: 50}}>
-//               <Text style={{marginBottom: 5, fontSize: 17, lineHeight: 25}}>
-//                 {updatedOrder.buyerDetails !== undefined &&
-//                   updatedOrder?.buyerDetails[0]?.buyerAddress}
-//               </Text>
-//               <Text
-//                 style={{
-//                   fontSize: 17,
-//                   marginBottom: 10,
-//                   color: appTheme.COLORS.black,
-//                 }}>
-//                 Customer local government area
-//               </Text>
-//               <Text
-//                 style={{
-//                   fontSize: 16,
-//                   textTransform: 'uppercase',
-//                   color: appTheme.COLORS.black,
-//                 }}>
-//                 {updatedOrder.buyerDetails !== undefined &&
-//                   updatedOrder?.buyerDetails[0]?.buyerAddress}
-//               </Text>
-
-//               <View style={{marginTop: 20, flexDirection: 'row'}}>
-//                 <Text style={{fontSize: 15, color: appTheme.COLORS.black}}>
-//                   {updatedOrder.buyerDetails !== undefined &&
-//                     updatedOrder?.buyerDetails[0]?.buyerPhoneNumber}
-//                 </Text>
-
-//                 <Pressable>
-//                   <View
-//                     style={{
-//                       flexDirection: 'row',
-//                       alignItems: 'center',
-//                       marginLeft: 60,
-//                     }}>
-//                     <Image source={icons.phoneIcon} />
-//                     <Text
-//                       style={{
-//                         fontSize: 15,
-//                         fontWeight: '500',
-//                         marginLeft: 5,
-//                         color: appTheme.COLORS.black,
-//                       }}>
-//                       Call
-//                     </Text>
-//                   </View>
-//                 </Pressable>
-//               </View>
-//             </View>
-//           </View>
-//         </View>
-
-//         {/* done */}
-
-//         <FlatList
-//           style={{
-//             backgroundColor: appTheme.COLORS.white,
-//             marginTop: 25,
-//             marginBottom: 25,
-//           }}
-//           data={productsToSell}
-//           keyExtractor={(item, id) => id.toString()}
-//           renderItem={({item}) => <InvoiceCard product={item} />}
-//           ListHeaderComponent={() => (
-//             <View
-//               style={{
-//                 borderBottomWidth: 1,
-//                 borderBottomColor: appTheme.COLORS.Grey,
-//                 paddingVertical: 20,
-//                 paddingLeft: 10,
-//                 marginBottom: 20,
-//               }}>
-//               <Text style={{fontWeight: 'bold', fontSize: 17}}>
-//                 Order Summary
-//               </Text>
-//             </View>
-//           )}
-//           ListFooterComponent={() => (
-//             <View
-//               style={{
-//                 flexDirection: 'row',
-//                 alignItems: 'center',
-//                 paddingRight: 30,
-//                 paddingLeft: 100,
-//                 paddingBottom: 20,
-//               }}>
-//               <Text style={{fontSize: 17}}>Total amount</Text>
-//               <Text
-//                 style={{
-//                   fontWeight: 'bold',
-//                   fontSize: 18,
-//                   marginLeft: 65,
-//                 }}>
-//                 {'\u20A6'}
-//                 {getTotalPrice()}
-//               </Text>
-//             </View>
-//           )}
-//         />
-
-//         {/* done */}
-
-//         {/* timeline */}
-
-//         <View
-//           style={{
-//             backgroundColor: appTheme.COLORS.white,
+//             paddingHorizontal: 20,
 //             marginBottom: 20,
-//             paddingLeft: 20,
-//             paddingVertical: 10,
 //           }}>
-//           <Text
-//             style={{
-//               fontSize: 16,
-//               marginBottom: 10,
-//               fontWeight: 'bold',
-//               color: appTheme.COLORS.black,
-//             }}>
-//             Timeline
-//           </Text>
-
-//           <View>
-//             <View
-//               style={{
-//                 flexDirection: 'row',
-//                 alignItems: 'center',
-//                 marginBottom: 10,
-//               }}>
-//               <Image
-//                 style={{width: 16, height: 16, marginRight: 6}}
-//                 source={icons.smallCheckIcon}
-//               />
-//               <Text> Completed </Text>
-//               <Text style={{fontSize: 14, textTransform: 'lowercase'}}>
-//                 on{' '}
-//                 {updatedOrder.orderStatus !== undefined &&
-//                   moment(updatedOrder?.orderStatus[0]?.dateCompleted).format(
-//                     'MMM Do, YYYY',
-//                   )}
-//                 at{' '}
-//                 {new Date(
-//                   updatedOrder?.orderStatus[0]?.timeCompleted,
-//                 ).toLocaleTimeString()}
-//               </Text>
-//             </View>
-
-//             <View
-//               style={{
-//                 flexDirection: 'row',
-//                 alignItems: 'center',
-//                 marginBottom: 10,
-//               }}>
-//               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-//                 <Image
-//                   style={{width: 16, height: 16, marginRight: 10}}
-//                   source={icons.smallCheckIcon}
-//                 />
-
-//                 <Text>Accepted </Text>
-//                 <Text style={{fontSize: 14, textTransform: 'lowercase'}}>
-//                   on{' '}
-//                   {updatedOrder.orderStatus !== undefined &&
-//                     moment(updatedOrder?.orderStatus[0]?.dateAccepted).format(
-//                       'MMM Do, YYYY',
-//                     )}
-//                   at{' '}
-//                   {new Date(
-//                     updatedOrder?.orderStatus[0]?.timeAccepted,
-//                   ).toLocaleTimeString()}
-//                 </Text>
-//               </View>
-//             </View>
-
-//             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-//               <Image
-//                 style={{width: 16, height: 16, marginRight: 10}}
-//                 source={icons.smallCheckIcon}
-//               />
-
-//               <Text>Assigned </Text>
-//               <Text style={{fontSize: 14, textTransform: 'lowercase'}}>
-//                 to you on{' '}
-//                 {updatedOrder.orderStatus !== undefined &&
-//                   moment(updatedOrder?.orderStatus[0]?.dateAssigned).format(
-//                     'MMM Do, YYYY',
-//                   )}
-//                 at{' '}
-//                 {new Date(
-//                   updatedOrder?.orderStatus[0]?.timeAssigned,
-//                 ).toLocaleTimeString()}
-//               </Text>
-//             </View>
+//           <View style={styles.searchInputContainer}>
+//             <Icon
+//               name="search"
+//               size={25}
+//               style={{color: appTheme.COLORS.MainGray}}
+//             />
+//             <TextInput
+//               placeholder="Search"
+//               style={{fontSize: 18, paddingLeft: 5, flex: 1}}
+//               onChangeText={text => handleOnChangetext(text)}
+//             />
 //           </View>
 //         </View>
+//         {/* searchbar */}
 
-//         {/* timeline */}
+//         <View
+//           style={{
+//             marginTop: 5,
+//             marginBottom: 30,
+//           }}>
+//           <SellProductFlatList
+//             newProducts={newProducts}
+//             incrementQuantity={incrementQuantity}
+//             decrementQuantity={decrementQuantity}
+//             deleteProduct={deleteProduct}
+//             loading={loading}
+//           />
+//         </View>
 //       </CustomVirtualizedView>
 
 //       {/* Footer */}
-//       <View
-//         style={{
-//           backgroundColor: appTheme.COLORS.white,
-//           flexDirection: 'row',
-//           justifyContent: 'space-between',
-//           alignItems: 'center',
-//           paddingHorizontal: 20,
-//           paddingVertical: 20,
-//         }}>
-//         <Pressable
-//           style={{
-//             backgroundColor: appTheme.COLORS.mainRed,
-//             borderRadius: 4,
-//             width: '100%',
-//             height: 45,
-//             justifyContent: 'center',
-//           }}>
-//           <Text
-//             style={{
-//               fontSize: 17,
-//               color: appTheme.COLORS.white,
-//               textAlign: 'center',
-//             }}>
-//             Generate Invoice
-//           </Text>
-//         </Pressable>
-//       </View>
-//     </>
-//   ) : (
-//     <>
-//       <View
-//         style={{
-//           flex: 1,
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}>
-//         <ActivityIndicator
-//           color={
-//             Platform.OS === 'android' ? appTheme.COLORS.mainRed : undefined
-//           }
-//           animating={updatedLoading}
-//           size="large"
-//         />
-//       </View>
-//     </>
+//       <SellProductFooter
+//         getTotalPrice={getTotalPrice}
+//         productsToSell={productsToSell}
+//         incrementQuantity={incrementQuantity}
+//         decrementQuantity={decrementQuantity}
+//         deleteProduct={deleteProduct}
+//         order={order}
+//       />
+//     </SafeAreaView>
 //   );
-// }
+// };
 
-// setNewOrders([
-//   {
-//     productId: theOrder.productId,
-//     quantity: parseInt(theOrder.quantity),
-//     brand: orderDetails?.brand,
-//     price: parseInt(theOrder?.price),
-//     productType: orderDetails?.productType,
-//     unitPrice: parseInt(theOrder.price / theOrder.quantity),
-//     orderId: theOrder.orderId,
-//     imageUrl: orderDetails?.imageUrl,
-//     sku: orderDetails?.sku,
-//     productPrice: orderDetails?.price,
+// export default SellToCustomer;
+
+// const styles = StyleSheet.create({
+//   searchInputContainer: {
+//     height: 50,
+//     backgroundColor: appTheme.COLORS.white,
+//     marginTop: 15,
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     borderColor: '#9799A0',
+//     borderWidth: 1,
+//     borderRadius: 5,
+//     paddingHorizontal: 10,
 //   },
-// ]);
+// });

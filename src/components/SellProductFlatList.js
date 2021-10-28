@@ -4,16 +4,15 @@ import appTheme from '../constants/theme';
 import SellProductFlatListCard from './SellProductFlatListCard';
 
 const SellProductFlatList = ({
-  newProducts,
+  inventory,
   incrementQuantity,
   decrementQuantity,
   deleteProduct,
-  loading,
 }) => {
   return (
     <>
       <FlatList
-        data={newProducts}
+        data={inventory}
         keyExtractor={(item, id) => id.toString()}
         renderItem={({item}) => (
           <SellProductFlatListCard
@@ -30,15 +29,6 @@ const SellProductFlatList = ({
               width: '100%',
               backgroundColor: appTheme.COLORS.borderGRey,
             }}></View>
-        )}
-        ListEmptyComponent={() => (
-          <ActivityIndicator
-            color={
-              Platform.OS === 'android' ? appTheme.COLORS.mainRed : undefined
-            }
-            animating={loading}
-            size="large"
-          />
         )}
       />
     </>

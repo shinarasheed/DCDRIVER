@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Pressable,
-  TextInput,
   Image,
   Text,
   View,
@@ -12,96 +11,99 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {fetchProducts} from '../../redux/actions/productActions';
 import SearchBar from '../../components/SearchBar';
 import appTheme from '../../constants/theme';
 import SellProductFlatList from '../../components/SellProductFlatList';
 import SellProductFooter from '../../components/SellProductFooter';
 import CustomVirtualizedView from '../../components/VirtualizedList';
 import {icons} from '../../constants';
+import {fetchVanProducts} from '../../redux/actions/vanActions';
 
 const SellToCustomer = () => {
-  const [searchField, setSearchField] = useState('');
   const navigator = useNavigation();
-  const Allproducts = useSelector(state => state.products);
-  const customerOneOf = useSelector(state => state.customerOneOf);
-  const {
-    customer,
-    loading: loadingCustomer,
-    error: errorCustomer,
-  } = customerOneOf;
-
   const dispatch = useDispatch();
-  const {products, loading, error} = Allproducts;
-
-  const [newProducts, setNewProducts] = useState([]);
+  const [empties, setEmpties] = useState(0);
+  const [newInventory, setNewInventory] = useState([]);
 
   const route = useRoute();
   const order = route.params;
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-  const createProducts = () => {
-    const lastestProducts = products.map(product => ({
-      ...product,
-      quantity: 0,
-    }));
-    return lastestProducts;
-  };
+  const Van = useSelector(state => state.van);
+  const {inventory, loading: vanLoading, error: vanError} = Van;
 
   useEffect(() => {
-    setNewProducts(createProducts());
-  }, [products]);
+    dispatch(fetchVanProducts());
+    let x = [];
+    inventory.map(dat => {
+      const z = dat?.product;
+      x.push({
+        ...z,
+        quantity: 0,
+      });
+    });
+    setNewInventory([...x]);
+  }, []);
 
-  const incrementQuantity = productId => {
-    let product = newProducts.find(product => product.productId === productId);
-    product.quantity++;
-    setNewProducts([...newProducts]);
+  const getQuantity = (productId, quantity) => {
+    return (
+      quantity <
+      inventory.find(product => product.product.productId === productId)
+        ?.quantity
+    );
   };
 
-  const decrementQuantity = productId => {
-    const product = newProducts.find(
-      product => product.productId === productId,
-    );
-    if (product.quantity === 1) {
-      const index = newProducts.findIndex(
-        product => product.productId === productId,
-      );
-      newProducts.splice(index, 1);
-      setNewProducts([...newProducts]);
-    } else {
-      product.quantity--;
-      setNewProducts([...newProducts]);
-    }
-  };
-
-  const deleteProduct = productId => {
-    const index = newProducts.findIndex(
-      product => product.productId === productId,
-    );
-    newProducts.splice(index, 1);
-    setNewProducts([...newProducts]);
+  const getEmptiesPrice = () => {
+    return empties * 1000;
   };
 
   const getTotalPrice = () => {
-    return newProducts.reduce(
-      (accumulator, item) => accumulator + item.quantity * item.price,
+    return newInventory.reduce(
+      (accumulator, item) => accumulator + item.price * item.quantity,
       0,
     );
   };
 
-  const productsToSell = newProducts.filter(product => product.quantity > 0);
-
-  let filteredProducts = [];
-
-  const handleOnChangetext = text => {
-    setSearchField(text);
-    filteredProducts = newProducts.filter(prod => {
-      return prod.brand.toLowerCase().includes(searchField.toLowerCase());
-    });
+  const incrementQuantity = productId => {
+    let product = newInventory.find(product => product.productId === productId);
+    product.quantity++;
+    setNewInventory([...newInventory]);
   };
+
+  const decrementQuantity = productId => {
+    const product = newInventory.find(
+      product => product.productId === productId,
+    );
+    if (product.quantity === 1) {
+      const index = newInventory.findIndex(
+        product => product.product.productId === productId,
+      );
+      newInventory.splice(index, 1);
+      setNewInventory([...newInventory]);
+    } else {
+      product.quantity--;
+      setNewInventory([...newInventory]);
+    }
+  };
+
+  const deleteProduct = productId => {
+    const index = newInventory.findIndex(
+      product => product.productId === productId,
+    );
+    newInventory.splice(index, 1);
+    setNewInventory([...newInventory]);
+  };
+
+  const calNumberOfFull = () => {
+    return newInventory
+      .filter(product => product.product.productType === 'full')
+      .reduce((acc, index) => parseInt(acc) + parseInt(index?.quantity), 0);
+  };
+
+  const getTotal = () => {
+    return getTotalPrice() + (calNumberOfFull() - empties) * 1000;
+  };
+
+  const productsToSell = newInventory.filter(product => product.quantity > 0);
 
   return (
     <SafeAreaView
@@ -117,6 +119,7 @@ const SellToCustomer = () => {
           flexDirection: 'row',
           alignItems: 'center',
           paddingBottom: 5,
+          marginBottom: 40,
         }}>
         <Pressable onPress={() => navigator.goBack()}>
           <Image source={icons.backButton} style={{marginRight: 18}} />
@@ -129,13 +132,13 @@ const SellToCustomer = () => {
             ...appTheme.FONTS.mainFontBold,
             textTransform: 'capitalize',
           }}>
-          {customer.CUST_Name !== undefined && `sell to ${customer.CUST_Name}`}
+          {`sell to ${order?.buyerDetails[0]?.buyerName}`}
         </Text>
       </View>
 
       <CustomVirtualizedView>
         {/* <SearchBar /> */}
-        <View
+        {/* <View
           style={{
             paddingHorizontal: 20,
             marginBottom: 20,
@@ -152,7 +155,7 @@ const SellToCustomer = () => {
               onChangeText={text => handleOnChangetext(text)}
             />
           </View>
-        </View>
+        </View> */}
         {/* searchbar */}
 
         <View
@@ -161,15 +164,15 @@ const SellToCustomer = () => {
             marginBottom: 30,
           }}>
           <SellProductFlatList
-            newProducts={newProducts}
+            inventory={newInventory}
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
             deleteProduct={deleteProduct}
-            loading={loading}
+            loading={vanLoading}
           />
         </View>
       </CustomVirtualizedView>
-
+      {/* 
       {/* Footer */}
       <SellProductFooter
         getTotalPrice={getTotalPrice}

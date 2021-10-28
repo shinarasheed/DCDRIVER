@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
-import SearchInput from '../../components/SearchInput';
+// import SearchInput from '../../components/SearchInput';
 import Header from '../../components/Header';
 import TopTab from '../../components/CustomersTopTab';
 import CustomerCard from '../../components/CustomerCard';
@@ -44,7 +44,7 @@ const CustomersScreen = () => {
             selectedCategoryIndex={selectedCategoryIndex}
             setSelectedCategoryIndex={setSelectedCategoryIndex}
           />
-          <SearchInput />
+          {/* <SearchInput /> */}
         </View>
 
         {!loading ? (
