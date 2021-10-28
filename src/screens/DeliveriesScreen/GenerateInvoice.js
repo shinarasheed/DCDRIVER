@@ -240,16 +240,14 @@ const GenerateInvoice = () => {
                 style={{width: 16, height: 16, marginRight: 6}}
                 source={icons.smallCheckIcon}
               />
+
               <Text> Completed </Text>
               <Text style={{fontSize: 14, textTransform: 'lowercase'}}>
                 on{' '}
-                {moment(order?.orderStatus[0]?.dateCompleted).format(
-                  'MMM Do, YYYY',
-                )}
-                at{' '}
-                {new Date(
-                  order?.orderStatus[0]?.timeCompleted,
-                ).toLocaleTimeString()}
+                {moment(
+                  new Date(new Date().getTime()).toISOString().split('T')[0],
+                ).format('MMM Do, YYYY')}
+                at {new Date(new Date().getTime()).toLocaleTimeString()}
               </Text>
             </View>
 

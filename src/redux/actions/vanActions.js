@@ -19,7 +19,7 @@ export const fetchVanProducts = () => async dispatch => {
 
     const {
       data: {data},
-    } = await axios.get(`${vanurl}/van/6`);
+    } = await axios.get(`${vanurl}/van/1`);
 
     dispatch({
       type: FETCH_INVENTORY_SUCCESS,

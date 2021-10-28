@@ -376,3 +376,18 @@
 //     </>
 //   );
 // }
+
+// setNewOrders([
+//   {
+//     productId: theOrder.productId,
+//     quantity: parseInt(theOrder.quantity),
+//     brand: orderDetails?.brand,
+//     price: parseInt(theOrder?.price),
+//     productType: orderDetails?.productType,
+//     unitPrice: parseInt(theOrder.price / theOrder.quantity),
+//     orderId: theOrder.orderId,
+//     imageUrl: orderDetails?.imageUrl,
+//     sku: orderDetails?.sku,
+//     productPrice: orderDetails?.price,
+//   },
+// ]);

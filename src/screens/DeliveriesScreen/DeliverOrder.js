@@ -94,7 +94,7 @@ const DeliverOrder = () => {
             <Pressable onPress={() => navigation.goBack()}>
               <Image source={icons.backButton} />
             </Pressable>
-            <Text style={styles.headerText}>Order {theOrder?.referenceId}</Text>
+            <Text style={styles.headerText}>Order {theOrder?.orderId}</Text>
           </View>
 
           <CustomVirtualizedView>

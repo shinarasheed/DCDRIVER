@@ -145,7 +145,7 @@ const ProductsScreen = () => {
                 ...appTheme.FONTS.mainFontBold,
                 marginLeft: 20,
               }}>
-              Return all products to warehoue
+              Return products to warehoue
             </Text>
           </View>
         </Pressable>
