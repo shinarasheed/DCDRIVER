@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FlatList, StyleSheet, Image, Pressable, Text, View} from 'react-native';
 import icons from '../constants/icons';
 
