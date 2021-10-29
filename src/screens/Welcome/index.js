@@ -1,11 +1,5 @@
 // import React from 'react';
-// import {
-//   StyleSheet,
-//   SafeAreaView,
-//   Image,
-//   Text,
-//   View,
-// } from 'react-native';
+// import {StyleSheet, SafeAreaView, Image, Text, View} from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
 
 // import {images} from '../../constants';
@@ -52,56 +46,58 @@
 
 // const styles = StyleSheet.create({});
 
-// import React from 'react';
-// import {ActivityIndicator, Platform, Alert} from 'react-native';
-// import {LoginView} from 'ad-b2c-react-native';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import appTheme from '../../constants/theme';
+import React from 'react';
+import {ActivityIndicator, Platform, Alert} from 'react-native';
+import {LoginView} from 'ad-b2c-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import appTheme from '../../constants/theme';
 
-// export default class Login extends React.PureComponent {
-//   static navigationOptions = {header: null};
+export default class Login extends React.PureComponent {
+  static navigationOptions = {header: null};
 
-//   constructor(props) {
-//     super(props);
-//     this.onLogin = this.onLogin.bind(this);
-//     this.onFail = this.onFail.bind(this);
-//     this.spinner = this.spinner.bind(this);
-//   }
+  constructor(props) {
+    super(props);
+    this.onLogin = this.onLogin.bind(this);
+    this.onFail = this.onFail.bind(this);
+    this.spinner = this.spinner.bind(this);
+  }
 
-//   onLogin() {
-//     const {navigation} = this.props;
-//     navigation.navigate('App');
-//   }
+  onLogin() {
+    console.log('here');
+    const {navigation} = this.props;
+    navigation.navigate('App');
+  }
 
-//   onFail(reason) {
-//     Alert.alert(reason);
-//   }
+  onFail(reason) {
+    Alert.alert(reason);
+    console.log(reason);
+  }
 
-//   spinner() {
-//     return (
-//       <ActivityIndicator
-//         color={Platform.OS === 'android' ? appTheme.COLORS.mainRed : undefined}
-//         animating={true}
-//         size="large"
-//       />
-//     );
-//   }
+  spinner() {
+    return (
+      <ActivityIndicator
+        color={Platform.OS === 'android' ? appTheme.COLORS.mainRed : undefined}
+        animating={true}
+        size="large"
+      />
+    );
+  }
 
-//   render() {
-//     return (
-//       <LoginView
-//         appId="myAppId"
-//         redirectURI="myRedirectURI"
-//         tenant="myTenant"
-//         loginPolicy="B2C_1_SignUpSignIn"
-//         passwordResetPolicy="B2C_1_PasswordReset"
-//         profileEditPolicy="B2C_1_ProfileEdit"
-//         onSuccess={this.onLogin}
-//         onFail={this.onFail}
-//         secureStore={AsyncStorage}
-//         renderLoading={this.spinner}
-//         scope="openid offline_access myScope1 myScope2 ...." //optional, but see the notes above
-//       />
-//     );
-//   }
-// }
+  render() {
+    return (
+      <LoginView
+        appId="8c11baca-fdbc-4b7f-b2cf-3a177588f37c"
+        redirectURI="https://abi-distributorcentral.com/callback"
+        tenantId="75cd5d8e-6c8a-42e8-893f-f1f3f4282dcf"
+        loginPolicy="B2C_1_SignUpSignIn"
+        passwordResetPolicy="B2C_1_PasswordReset"
+        profileEditPolicy="B2C_1_ProfileEdit"
+        onSuccess={this.onLogin}
+        onFail={this.onFail}
+        secureStore={AsyncStorage}
+        renderLoading={this.spinner}
+        // scope="openid offline_access myScope1 myScope2 ...." //optional, but see the notes above
+      />
+    );
+  }
+}
