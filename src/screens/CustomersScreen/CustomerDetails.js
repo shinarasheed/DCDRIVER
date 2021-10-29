@@ -65,7 +65,7 @@ const Customer = () => {
               marginLeft: 8,
               ...appTheme.FONTS.mainFontLight,
             }}>
-            {moment(item?.orderStatus[0]?.dateAssigned).format('MMM Do, YY')}
+            {moment(item?.orderStatus[0]?.dateAssigned).format('MMM Do, YYYY')}
           </Text>
           <Text
             style={{
@@ -74,7 +74,7 @@ const Customer = () => {
               fontSize: 14,
               ...appTheme.FONTS.mainFontLight,
             }}>
-            at ({item?.orderStatus[0]?.timeAssigned})
+            at {moment(item?.orderStatus[0]?.timeAssigned).format('hh:mm')}
           </Text>
         </View>
 
@@ -228,7 +228,7 @@ const Customer = () => {
                   marginBottom: 10,
                   color: appTheme.COLORS.black,
                 }}>
-                Customer local government area
+                local government area
               </Text>
               <Text
                 style={{
