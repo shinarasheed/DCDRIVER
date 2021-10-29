@@ -83,7 +83,9 @@ const SellProductFooter = ({
       </Pressable>
 
       <Button
-        onPress={() => navigation.navigate('GenerateInvoice', {productsToSell})}
+        onPress={() =>
+          navigation.navigate('GenerateInvoice', {productsToSell, order})
+        }
         disabled={productsToSell.length === 0}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,

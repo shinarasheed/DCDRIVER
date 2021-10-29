@@ -16,6 +16,7 @@ import GenerateInvoice from './DeliveriesScreen/GenerateInvoice';
 import Signin from './Auth/Signin';
 import Signup from './Auth/Signup';
 import Welcome from './Welcome';
+import SalesInvoice from './CustomersScreen/SalesInVoice';
 
 export {
   HomeScreen,
@@ -36,4 +37,5 @@ export {
   Signin,
   Signup,
   Welcome,
+  SalesInvoice,
 };

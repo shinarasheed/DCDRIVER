@@ -16,19 +16,11 @@ const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
   return (
     <View style={styles.footerContainer}>
       <Button
-        onPress={() => {
-          dispatch(
-            updateOrderStatus({
-              assignedToId: order.vehicleId,
-              orderId: order.orderId,
-              status: 'Completed',
-            }),
-          );
-
-          navigator.navigate('GenerateInvoice', {
+        onPress={() =>
+          navigator.navigate('SalesInvoice', {
             productsToSell,
-          });
-        }}
+          })
+        }
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,
           width: '100%',

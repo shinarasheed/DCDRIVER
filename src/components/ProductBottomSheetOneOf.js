@@ -8,7 +8,7 @@ import CustomVirtualist from './VirtualizedList';
 import ProductFooter from './ProductFooterOneOf';
 import EmptiesCustomer from './EmptiesCustomerOneOf';
 
-const ProductBottomSheet = ({
+const ProductBottomSheetOneOf = ({
   productsToSell,
   incrementQuantity,
   decrementQuantity,
@@ -21,6 +21,7 @@ const ProductBottomSheet = ({
   setEmpties,
   empties,
   getEmptiesPrice,
+  customer,
 }) => {
   return (
     <CustomVirtualist>
@@ -38,9 +39,7 @@ const ProductBottomSheet = ({
             flexDirection: 'row',
             marginBottom: 20,
           }}>
-          <Text style={{fontSize: 18}}>
-            Sell To {item?.buyerDetails[0]?.buyerName}
-          </Text>
+          <Text style={{fontSize: 18}}>Sell To {customer.CUST_Name}</Text>
           <Pressable onPress={() => toggle()}>
             <Image source={icons.cancelIcon} />
           </Pressable>
@@ -146,7 +145,7 @@ const ProductBottomSheet = ({
   );
 };
 
-export default ProductBottomSheet;
+export default ProductBottomSheetOneOf;
 
 const styles = StyleSheet.create({
   productIncreaseDecreaseContainer: {

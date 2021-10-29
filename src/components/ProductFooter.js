@@ -27,6 +27,7 @@ const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
 
           navigator.navigate('GenerateInvoice', {
             productsToSell,
+            order,
           });
         }}
         buttonStyle={{

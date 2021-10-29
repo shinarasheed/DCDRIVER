@@ -7,6 +7,7 @@ import {
   CustomersScreen,
   OneOfSale,
   AddCustomer,
+  SalesInvoice,
 } from '../screens';
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ const CustomerStackNavigator = () => {
       <Stack.Screen name="SellToCustomer" component={SellToCustomer} />
       <Stack.Screen name="OneOfSale" component={OneOfSale} />
       <Stack.Screen name="AddCustomer" component={AddCustomer} />
+      <Stack.Screen name="SalesInvoice" component={SalesInvoice} />
     </Stack.Navigator>
   );
 };

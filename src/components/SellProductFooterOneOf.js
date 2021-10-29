@@ -6,7 +6,7 @@ import {BottomSheet} from 'react-native-btr';
 import {Button} from 'react-native-elements';
 
 import appTheme from '../constants/theme';
-import ProductBottomSheet from './ProductBottomSheet';
+import ProductBottomSheetOneOf from './ProductBottomSheetOneOf';
 
 const SellProductFooter = ({
   getTotalPrice,
@@ -21,6 +21,7 @@ const SellProductFooter = ({
   setEmpties,
   empties,
   getEmptiesPrice,
+  customer,
 }) => {
   const navigation = useNavigation();
 
@@ -101,7 +102,7 @@ const SellProductFooter = ({
         onBackButtonPress={toggle}
         onBackdropPress={toggle}>
         <View style={styles.bottomSheetCard}>
-          <ProductBottomSheet
+          <ProductBottomSheetOneOf
             getTotalPrice={getTotalPrice}
             toggle={toggle}
             productsToSell={productsToSell}
@@ -114,6 +115,7 @@ const SellProductFooter = ({
             setEmpties={setEmpties}
             empties={empties}
             getEmptiesPrice={getEmptiesPrice}
+            customer={customer}
           />
         </View>
       </BottomSheet>

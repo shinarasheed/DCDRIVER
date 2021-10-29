@@ -39,7 +39,7 @@ const ProductBottomSheet = ({
             marginBottom: 20,
           }}>
           <Text style={{fontSize: 18}}>
-            Sell To {item?.buyerDetails[0]?.buyerName}
+            {/* Sell To {item?.buyerDetails[0]?.buyerName} */}
           </Text>
           <Pressable onPress={() => toggle()}>
             <Image source={icons.cancelIcon} />

@@ -11,10 +11,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import SearchBar from '../../components/SearchBar';
+// import SearchBar from '../../components/SearchBar';
 import appTheme from '../../constants/theme';
 import SellProductFlatList from '../../components/SellProductFlatListOneOf';
-import SellProductFooter from '../../components/SellProductFooter';
+import SellProductFooter from '../../components/SellProductFooterOneOf';
 import CustomVirtualizedView from '../../components/VirtualizedList';
 import {icons} from '../../constants';
 import {fetchVanProducts} from '../../redux/actions/vanActions';
@@ -205,6 +205,7 @@ const SellToCustomer = () => {
         calNumberOfFull={calNumberOfFull}
         setEmpties={setEmpties}
         empties={empties}
+        customer={customer}
       />
     </SafeAreaView>
   );
