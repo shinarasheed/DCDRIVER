@@ -137,9 +137,9 @@ const SellToCustomer = () => {
             ...appTheme.FONTS.mainFontBold,
             textTransform: 'capitalize',
           }}>
-          {`${
-            customer.CUST_Name !== undefined && `sell to${customer.CUST_Name}`
-          }`}
+          {customer.CUST_Name !== undefined
+            ? `sell to ${customer.CUST_Name}`
+            : null}
         </Text>
       </View>
 
