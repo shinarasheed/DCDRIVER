@@ -36,10 +36,10 @@ const ProductBottomSheet = ({
           style={{
             justifyContent: 'space-between',
             flexDirection: 'row',
-            marginBottom: 20,
+            marginBottom: 15,
           }}>
           <Text style={{fontSize: 18}}>
-            {/* Sell To {item?.buyerDetails[0]?.buyerName} */}
+            Sell To {item?.buyerDetails[0]?.buyerName}
           </Text>
           <Pressable onPress={() => toggle()}>
             <Image source={icons.cancelIcon} />
