@@ -12,7 +12,7 @@ import {
   CONFIRM_VAN_SALES_SUCCESS,
   CONFIRM_VAN_SALES_FAIL,
 } from '../constants/vanConstants';
-import {vanurl} from '../../utils/baseUrl';
+import {vanurl, orderUrl} from '../../utils/baseUrl';
 
 export const fetchVanProducts = () => async dispatch => {
   try {
@@ -76,17 +76,17 @@ export const confirmVanSales = payload => async dispatch => {
       type: CONFIRM_VAN_SALES_REQUEST,
     });
 
+    const token =
+      'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoic2FsZXNmb3JjZV90b2tlbl9pZGVudGlmaWVyX2Rtc192Ml8weHNqdDNAMyEjJF45In0.PHCkrf6sPkoep7lF5X-SugN8-CVaJ5BEYa9hvSWLPMo';
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
     };
 
-    const {data} = await axios.put(
-      `${vanurl}/inventory/update-quantity`,
-      payload,
-      config,
-    );
+    const {data} = await axios.post(`${orderUrl}/CreateOrder`, payload, config);
 
     dispatch({
       type: CONFIRM_VAN_SALES_SUCCESS,

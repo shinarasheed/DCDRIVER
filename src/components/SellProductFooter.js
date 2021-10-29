@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, Image, View, Pressable} from 'react-native';
-import {useNavigation} from '@react-navigation//native';
 import {icons} from '../constants';
 import {BottomSheet} from 'react-native-btr';
 import {Button} from 'react-native-elements';
+import {confirmVanSales} from '../redux/actions/vanActions';
 
 import appTheme from '../constants/theme';
 import ProductBottomSheet from './ProductBottomSheet';
@@ -28,6 +30,8 @@ const SellProductFooter = ({
   const [salesCompleted, setSalesCompleted] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
 
+  const dispatch = useDispatch();
+
   function toggle() {
     setVisible(visible => !visible);
   }
@@ -35,6 +39,31 @@ const SellProductFooter = ({
   function toggleConfirm() {
     setConfirmVisible(visible => !visible);
   }
+
+  const items = productsToSell.map(prod => ({
+    price: prod.price * prod.quantity,
+    quantity: prod.quantity,
+    productId: prod.productId,
+    SFlineID: 'Van-Sales',
+  }));
+
+  const payload = {
+    buyerCompanyId: order.buyerCompanyId,
+    sellerCompanyId: order.sellerCompanyId,
+    routeName: 'Van-Sales',
+    referenceId: 'Van-Sales',
+    datePlaced: new Date(new Date().getTime()),
+    shipToCode: order.buyerCompanyId,
+    billToCode: order.buyerCompanyId,
+    // transactionNo,
+    buyerDetails: {
+      buyerName: order.buyerDetails[0].buyerName,
+      buyerPhoneNumber: order.buyerDetails[0].buyerPhoneNumber,
+      buyerAddress: order.buyerDetails[0].buyerAddress,
+    },
+
+    orderItems: items,
+  };
 
   return (
     <View style={styles.footerContainer}>
@@ -83,9 +112,13 @@ const SellProductFooter = ({
       </Pressable>
 
       <Button
-        onPress={() =>
-          navigation.navigate('GenerateInvoice', {productsToSell, order})
-        }
+        onPress={() => {
+          dispatch(confirmVanSales(payload));
+          navigation.navigate('GenerateInvoice', {
+            productsToSell,
+            order,
+          });
+        }}
         disabled={productsToSell.length === 0}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,
