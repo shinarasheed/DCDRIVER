@@ -44,7 +44,7 @@ const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
       <Button
         onPress={() => {
           dispatch(confirmVanSales(payload));
-          navigator.navigate('GenerateInvoice', {
+          navigator.navigate('VanInvoice', {
             productsToSell,
             order,
           });
