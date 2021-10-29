@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React from 'react';
 import {
   SafeAreaView,
   Text,
@@ -58,32 +57,6 @@ const GenerateInvoice = () => {
 
       <CustomVirtualizedView>
         <View style={{paddingLeft: 20, paddingVertical: 20}}>
-          {/* <View style={{flexDirection: 'row', marginBottom: 10}}>
-            <Text
-              style={{
-                fontSize: 15,
-                marginRight: 5,
-                textTransform: 'lowercase',
-              }}>
-              {moment(order?.orderStatus[0]?.dateAssigned).format(
-                'MMM Do, YYYY',
-              )}{' '}
-              at{' '}
-              {new Date(
-                order?.orderStatus[0]?.timeAssigned,
-              ).toLocaleTimeString()}{' '}
-              from
-            </Text>
-            <Text
-              style={{
-                fontSize: 17,
-                fontWeight: 'bold',
-                color: appTheme.COLORS.black,
-              }}>
-              {order?.buyerDetails[0]?.buyerName}
-            </Text>
-          </View> */}
-
           <View
             style={{
               width: 100,
@@ -125,28 +98,7 @@ const GenerateInvoice = () => {
           </View>
 
           <View style={{marginTop: 10, flexDirection: 'row'}}>
-            {/* <Image source={icons.addressIcon} /> */}
             <View style={{paddingRight: 50}}>
-              {/* <Text style={{marginBottom: 5, fontSize: 17, lineHeight: 25}}>
-                {order?.buyerDetails[0]?.buyerAddress}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 17,
-                  marginBottom: 10,
-                  color: appTheme.COLORS.black,
-                }}>
-                Customer local government area
-              </Text> */}
-              {/* <Text
-                style={{
-                  fontSize: 16,
-                  textTransform: 'uppercase',
-                  color: appTheme.COLORS.black,
-                }}>
-                {order?.buyerDetails[0]?.buyerAddress}
-              </Text> */}
-
               <View style={{marginTop: 5, flexDirection: 'row'}}>
                 <Text style={{fontSize: 15, color: appTheme.COLORS.black}}>
                   {customer.phoneNumber}
