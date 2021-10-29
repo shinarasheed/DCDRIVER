@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React from 'react';
 import {
   SafeAreaView,
   Text,
@@ -21,7 +20,7 @@ const GenerateInvoice = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const {productsToSell, empties, order} = route.params;
+  const {productsToSell, order} = route.params;
 
   const getTotalPrice = () => {
     return productsToSell.reduce(
