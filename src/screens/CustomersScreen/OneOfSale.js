@@ -137,43 +137,14 @@ const SellToCustomer = () => {
             ...appTheme.FONTS.mainFontBold,
             textTransform: 'capitalize',
           }}>
-          {`sell to ${customer !== undefined && customer.CUST_Name}`}
+          {`${
+            customer.CUST_Name !== undefined && `sell to${customer.CUST_Name}`
+          }`}
         </Text>
       </View>
 
       <CustomVirtualizedView>
-        {/* <SearchBar /> */}
-        {/* <View
-          style={{
-            paddingHorizontal: 20,
-            marginBottom: 20,
-          }}>
-          <View style={styles.searchInputContainer}>
-            <Icon
-              name="search"
-              size={25}
-              style={{color: appTheme.COLORS.MainGray}}
-            />
-            <TextInput
-              placeholder="Search"
-              style={{fontSize: 18, paddingLeft: 5, flex: 1}}
-              onChangeText={text => handleOnChangetext(text)}
-            />
-          </View>
-        </View> */}
-        {/* searchbar */}
-
-        {/*  you need the token for customer and one of sales */}
-        {/* new Date(new Date.getTime()) */}
-        {/* shipToCode:buyerCompanyid */}
-        {/* billtocode:not compulsosy */}
-        {/* buyephone and adress is optional */}
-        {/* sflineId = Van-Sales */}
-
-        {/* One Off  */}
-
-        {/* one of does not need buyercompany id */}
-        {/* route name = One-Off */}
+        {/* seachbar */}
 
         <View
           style={{
