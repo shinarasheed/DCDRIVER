@@ -140,6 +140,7 @@ const ProductBottomSheetOneOf = ({
         getTotalPrice={getTotalPrice}
         order={item}
         productsToSell={productsToSell}
+        customer={customer}
       />
     </CustomVirtualist>
   );

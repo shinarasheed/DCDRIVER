@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {StyleSheet, Text, Image, View, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation//native';
 import {icons} from '../constants';
@@ -7,6 +8,7 @@ import {Button} from 'react-native-elements';
 
 import appTheme from '../constants/theme';
 import ProductBottomSheetOneOf from './ProductBottomSheetOneOf';
+import {confirmVanSales} from '../redux/actions/vanActions';
 
 const SellProductFooter = ({
   getTotalPrice,
@@ -23,7 +25,8 @@ const SellProductFooter = ({
   getEmptiesPrice,
   customer,
 }) => {
-  const navigation = useNavigation();
+  const navigator = useNavigation();
+  const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
   const [salesCompleted, setSalesCompleted] = useState(false);
@@ -36,6 +39,26 @@ const SellProductFooter = ({
   function toggleConfirm() {
     setConfirmVisible(visible => !visible);
   }
+
+  const items = productsToSell.map(prod => ({
+    price: prod.price * prod.quantity,
+    quantity: prod.quantity,
+    productId: prod.productId,
+    SFlineID: 'One-Off',
+  }));
+
+  const payload = {
+    sellerCompanyId: 'One-Off',
+    routeName: 'One-Off',
+    referenceId: 'One-Off',
+    datePlaced: new Date(new Date().getTime()),
+    buyerDetails: {
+      buyerName: customer.CUST_Name,
+      buyerPhoneNumber: customer.phoneNumber,
+    },
+
+    orderItems: items,
+  };
 
   return (
     <View style={styles.footerContainer}>
@@ -84,7 +107,13 @@ const SellProductFooter = ({
       </Pressable>
 
       <Button
-        onPress={() => navigation.navigate('GenerateInvoice', {productsToSell})}
+        onPress={() => {
+          dispatch(confirmVanSales(payload));
+          navigator.navigate('SalesInvoice', {
+            productsToSell,
+            customer,
+          });
+        }}
         disabled={productsToSell.length === 0}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,

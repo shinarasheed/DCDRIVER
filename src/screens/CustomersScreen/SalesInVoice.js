@@ -21,7 +21,7 @@ const GenerateInvoice = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const {productsToSell} = route.params;
+  const {productsToSell, customer} = route.params;
 
   const getTotalPrice = () => {
     return productsToSell.reduce(
@@ -107,10 +107,9 @@ const GenerateInvoice = () => {
           <View>
             <Text
               style={{
-                fontWeight: 'bold',
                 color: appTheme.COLORS.MainGray,
-                fontSize: 20,
-                marginBottom: 20,
+                fontSize: 18,
+                marginBottom: 15,
               }}>
               New Customer
             </Text>
@@ -119,15 +118,16 @@ const GenerateInvoice = () => {
                 fontSize: 16,
                 color: appTheme.COLORS.black,
                 ...appTheme.FONTS.mainFontBold,
+                textTransform: 'capitalize',
               }}>
-              {/* {order?.buyerDetails[0]?.buyerName} */}
+              {customer.CUST_Name}
             </Text>
           </View>
 
-          {/* <View style={{marginTop: 10, flexDirection: 'row'}}>
-            <Image source={icons.addressIcon} />
-            <View style={{marginLeft: 10, paddingRight: 50}}>
-              <Text style={{marginBottom: 5, fontSize: 17, lineHeight: 25}}>
+          <View style={{marginTop: 10, flexDirection: 'row'}}>
+            {/* <Image source={icons.addressIcon} /> */}
+            <View style={{paddingRight: 50}}>
+              {/* <Text style={{marginBottom: 5, fontSize: 17, lineHeight: 25}}>
                 {order?.buyerDetails[0]?.buyerAddress}
               </Text>
               <Text
@@ -137,26 +137,24 @@ const GenerateInvoice = () => {
                   color: appTheme.COLORS.black,
                 }}>
                 Customer local government area
-              </Text>
-              <Text
+              </Text> */}
+              {/* <Text
                 style={{
                   fontSize: 16,
                   textTransform: 'uppercase',
                   color: appTheme.COLORS.black,
                 }}>
                 {order?.buyerDetails[0]?.buyerAddress}
-              </Text>
+              </Text> */}
 
-              <View style={{marginTop: 20, flexDirection: 'row'}}>
+              <View style={{marginTop: 5, flexDirection: 'row'}}>
                 <Text style={{fontSize: 15, color: appTheme.COLORS.black}}>
-                  {order?.buyerDetails[0]?.buyerPhoneNumber}
+                  {customer.phoneNumber}
                 </Text>
-                <CallCustomer
-                  phoneNumber={order?.buyerDetails[0]?.buyerPhoneNumber}
-                />
+                <CallCustomer phoneNumber={customer.phoneNumber} />
               </View>
             </View>
-          </View> */}
+          </View>
         </View>
 
         <FlatList
