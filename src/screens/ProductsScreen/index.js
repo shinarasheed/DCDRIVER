@@ -142,10 +142,10 @@ const ProductsScreen = () => {
             <Text
               style={{
                 fontSize: 18,
-                ...appTheme.FONTS.mainFontBold,
                 marginLeft: 20,
+                color: appTheme.COLORS.black,
               }}>
-              Return products to warehoue
+              Return products to warehouse
             </Text>
           </View>
         </Pressable>

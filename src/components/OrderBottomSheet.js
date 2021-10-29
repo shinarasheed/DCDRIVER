@@ -9,6 +9,7 @@ import CustomVirtualist from './VirtualizedList';
 // import ProductFooter from './ProductFooter';
 import OrderFooter from './OrderFooter';
 import {fetchProducts} from '../redux/actions/productActions';
+import {fetchVanProducts} from '../redux/actions/vanActions';
 import Empties from './Empties';
 
 const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
@@ -17,6 +18,10 @@ const OrderBottomSheet = ({item, toggle, setVisible, visible}) => {
 
   const Van = useSelector(state => state.van);
   const {inventory, loading: vanLoading, error: vanError} = Van;
+
+  useEffect(() => {
+    dispatch(fetchVanProducts());
+  }, []);
 
   const getQuantity = (productId, quantity) => {
     return (

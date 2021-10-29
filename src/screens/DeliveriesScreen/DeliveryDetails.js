@@ -123,7 +123,7 @@ const DeliveryDetails = () => {
                   fontWeight: '800',
                   marginLeft: 20,
                 }}>
-                {theOrder?.orderId}
+                Order {theOrder?.orderId}
               </Text>
             </View>
 
