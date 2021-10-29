@@ -6,6 +6,7 @@ import {icons} from '../constants';
 import {BottomSheet} from 'react-native-btr';
 import {Button} from 'react-native-elements';
 import {confirmVanSales} from '../redux/actions/vanActions';
+import {updateInventory} from '../redux/actions/vanActions';
 
 import appTheme from '../constants/theme';
 import ProductBottomSheet from './ProductBottomSheet';
@@ -43,7 +44,7 @@ const SellProductFooter = ({
   const items = productsToSell.map(prod => ({
     price: prod.price * prod.quantity,
     quantity: prod.quantity,
-    productId: prod.productId,
+    productId: parseInt(prod.productId),
     SFlineID: 'Van-Sales',
   }));
 
@@ -118,6 +119,7 @@ const SellProductFooter = ({
             productsToSell,
             order,
           });
+          dispatch(updateInventory(payload));
         }}
         disabled={productsToSell.length === 0}
         buttonStyle={{

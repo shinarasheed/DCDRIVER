@@ -180,12 +180,13 @@ const Customer = () => {
           </View>
 
           <View>
-            <Text style={{fontSize: 15}}>Total Amount Spent</Text>
+            {/* <Text style={{fontSize: 15}}>Total Amount Spent</Text> */}
             <Text style={{fontSize: 20, ...appTheme.FONTS.mainFontBold}}>
-              {'\u20A6'}10,040,888.33
+              {/* {'\u20A6'}10,040,888.33 */}
             </Text>
             <Text style={{fontSize: 15, ...appTheme.FONTS.mainFontLight}}>
-              {numberOfOrders.length} Orders
+              {numberOfOrders.length}{' '}
+              {`${numberOfOrders.length > 1 ? 'Orders' : 'Order'}`}
             </Text>
           </View>
         </View>

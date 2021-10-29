@@ -6,6 +6,7 @@ import {Button} from 'react-native-elements';
 
 import appTheme from '../constants/theme';
 import {confirmVanSales} from '../redux/actions/vanActions';
+import {updateInventory} from '../redux/actions/vanActions';
 
 const SellProductFooter = ({getTotalPrice, customer, productsToSell}) => {
   const navigator = useNavigation();
@@ -15,7 +16,7 @@ const SellProductFooter = ({getTotalPrice, customer, productsToSell}) => {
   const items = productsToSell.map(prod => ({
     price: prod.price * prod.quantity,
     quantity: prod.quantity,
-    productId: prod.productId,
+    productId: parseInt(prod.productId),
     SFlineID: 'One-Off',
   }));
 
@@ -41,6 +42,7 @@ const SellProductFooter = ({getTotalPrice, customer, productsToSell}) => {
             productsToSell,
             customer,
           });
+          dispatch(updateInventory(payload));
         }}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,

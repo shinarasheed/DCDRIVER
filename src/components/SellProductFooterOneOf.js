@@ -9,6 +9,7 @@ import {Button} from 'react-native-elements';
 import appTheme from '../constants/theme';
 import ProductBottomSheetOneOf from './ProductBottomSheetOneOf';
 import {confirmVanSales} from '../redux/actions/vanActions';
+import {updateInventory} from '../redux/actions/vanActions';
 
 const SellProductFooter = ({
   getTotalPrice,
@@ -113,6 +114,7 @@ const SellProductFooter = ({
             productsToSell,
             customer,
           });
+          dispatch(updateInventory(payload));
         }}
         disabled={productsToSell.length === 0}
         buttonStyle={{

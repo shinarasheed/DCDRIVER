@@ -11,10 +11,12 @@ const ProductCard = ({item}) => {
         paddingHorizontal: 20,
         backgroundColor: appTheme.COLORS.white,
       }}>
-      <Image
-        style={{width: 30, height: 80}}
-        source={{uri: item.product.imageUrl}}
-      />
+      {item.product.imageUrl !== undefined && (
+        <Image
+          style={{width: 30, height: 80}}
+          source={{uri: item.product.imageUrl}}
+        />
+      )}
       <View style={{marginLeft: 20}}>
         <View
           style={{

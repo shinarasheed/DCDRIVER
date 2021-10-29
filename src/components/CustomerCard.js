@@ -66,9 +66,9 @@ const CustomerCard = ({order, allOrders}) => {
                 color: appTheme.COLORS.mainTextGray,
                 ...appTheme.FONTS.mainFontLight,
               }}>
-              {'\u20A6'}
+              {/* {'\u20A6'} */}
               {/* {customer.amount} */}
-              10,000000
+              {/* 10,000000 */}
             </Text>
           </View>
         </View>

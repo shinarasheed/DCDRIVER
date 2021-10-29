@@ -7,6 +7,7 @@ import {Button} from 'react-native-elements';
 import appTheme from '../constants/theme';
 import {updateOrderStatus} from '../redux/actions/orderActions';
 import {confirmVanSales} from '../redux/actions/vanActions';
+import {updateInventory} from '../redux/actions/vanActions';
 
 const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
   // TODO: you need to pass the item as route parameter later
@@ -17,7 +18,7 @@ const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
   const items = productsToSell.map(prod => ({
     price: prod.price * prod.quantity,
     quantity: prod.quantity,
-    productId: prod.productId,
+    productId: parseInt(prod.productId),
     SFlineID: 'Van-Sales',
   }));
 
@@ -48,6 +49,7 @@ const SellProductFooter = ({getTotalPrice, order, productsToSell}) => {
             productsToSell,
             order,
           });
+          dispatch(updateInventory(payload));
         }}
         buttonStyle={{
           backgroundColor: appTheme.COLORS.mainRed,

@@ -33,9 +33,9 @@ const ProductsScreen = () => {
     dispatch(fetchVanProducts());
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, []);
 
   return (
     <SafeAreaView
